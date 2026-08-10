@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useAuthStore, UserProfile } from '@/store/auth';
+import { useFavoritesStore } from '@/store/favorites';
 
 async function fetchMe() {
   const res = await fetch('/api/auth/me');
@@ -26,8 +27,10 @@ export function useUser() {
       setLoading(true);
     } else if (query.data) {
       setUser(query.data);
+      useFavoritesStore.getState().setUser(query.data.id);
     } else if (query.data === null || query.isError) {
       clearUser();
+      useFavoritesStore.getState().clearFavorites();
     }
   }, [query.data, query.isError, query.isLoading, setUser, clearUser, setLoading]);
 
@@ -55,6 +58,8 @@ export function useRegister() {
       if (data.user) {
         setUser(data.user);
         queryClient.setQueryData(['auth-user'], data.user);
+        useFavoritesStore.getState().setUser(data.user.id);
+        queryClient.invalidateQueries({ queryKey: ['favorites', data.user.id] });
       }
     },
   });
@@ -81,6 +86,8 @@ export function useLogin() {
       if (data.user) {
         setUser(data.user);
         queryClient.setQueryData(['auth-user'], data.user);
+        useFavoritesStore.getState().setUser(data.user.id);
+        queryClient.invalidateQueries({ queryKey: ['favorites', data.user.id] });
       }
     },
   });
@@ -103,7 +110,9 @@ export function useLogout() {
     },
     onSuccess: () => {
       clearUser();
+      useFavoritesStore.getState().clearFavorites();
       queryClient.setQueryData(['auth-user'], null);
+      queryClient.removeQueries({ queryKey: ['favorites'] });
       queryClient.invalidateQueries({ queryKey: ['auth-user'] });
     },
   });

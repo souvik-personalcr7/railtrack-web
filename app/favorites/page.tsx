@@ -1,15 +1,24 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Train, ArrowRight, MapPin } from 'lucide-react';
 import { useFavoritesStore } from '@/store/favorites';
+import { useAuthStore } from '@/store/auth';
 import { FavoriteButton } from '@/features/favorites/FavoriteButton';
 import { EmptyState } from '@/components/ui/EmptyState';
 
 export default function FavoritesPage() {
-  const { favorites } = useFavoritesStore();
+  const { favorites, fetchFavorites, setUser } = useFavoritesStore();
+  const { user } = useAuthStore();
+
+  useEffect(() => {
+    if (user?.id) {
+      setUser(user.id);
+    }
+    fetchFavorites();
+  }, [user?.id, setUser, fetchFavorites]);
 
   return (
     <div className="space-y-8 py-4">

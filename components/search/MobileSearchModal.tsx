@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { useSearchStore } from '@/store/search';
 import { useTrainSearch } from '@/hooks/useTrainSearch';
+import { FavoriteButton } from '@/features/favorites/FavoriteButton';
 import { SearchResult } from '@/types/train';
 
 function useDebounce<T>(value: T, delay: number): T {
@@ -144,7 +145,7 @@ export function MobileSearchModal() {
                       handleSearchSubmit();
                     }
                   }}
-                  placeholder="Enter train number or name..."
+                  placeholder="Enter train number or name"
                   className="w-full bg-transparent text-sm font-medium text-slate-900 placeholder-slate-400 outline-none dark:text-white dark:placeholder-slate-500"
                 />
 
@@ -161,10 +162,10 @@ export function MobileSearchModal() {
                 <button
                   type="button"
                   onClick={handleSearchSubmit}
-                  className="flex items-center gap-1 rounded-xl bg-rail-blue px-3.5 py-2 text-xs font-bold text-white shadow-glow transition-all hover:bg-sky-600 active:scale-95 flex-shrink-0"
+                  className="flex items-center gap-1 rounded-lg sm:rounded-xl bg-rail-blue px-2.5 py-1.5 text-[11px] font-bold text-white shadow-glow transition-all hover:bg-sky-600 active:scale-95 flex-shrink-0"
                 >
                   {isLoading && inputValue ? (
-                    <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                    <Loader2 className="h-3 w-3 animate-spin" />
                   ) : (
                     <span>Search</span>
                   )}
@@ -246,13 +247,15 @@ export function MobileSearchModal() {
                     Matching Trains
                   </p>
                   {searchResults.map((train) => (
-                    <button
+                    <div
                       key={train.id}
-                      type="button"
-                      onClick={() => handleSelectTrain(train)}
-                      className="w-full glass-panel group flex items-center justify-between rounded-2xl p-3 text-left transition-all hover:bg-rail-blue/10 hover:border-rail-blue/40"
+                      className="w-full glass-panel group flex items-center justify-between rounded-2xl p-3 transition-all hover:bg-rail-blue/10 hover:border-rail-blue/40"
                     >
-                      <div className="flex items-center gap-3 min-w-0">
+                      <button
+                        type="button"
+                        onClick={() => handleSelectTrain(train)}
+                        className="flex items-center gap-3 min-w-0 flex-1 text-left"
+                      >
                         <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-rail-blue/10 text-rail-blue group-hover:bg-rail-blue group-hover:text-white transition-colors">
                           <Train className="h-4 w-4" />
                         </div>
@@ -273,9 +276,20 @@ export function MobileSearchModal() {
                             </div>
                           )}
                         </div>
+                      </button>
+
+                      <div className="flex items-center gap-1.5 flex-shrink-0 ml-2">
+                        <FavoriteButton train={train} size="sm" />
+                        <button
+                          type="button"
+                          onClick={() => handleSelectTrain(train)}
+                          className="p-1.5 rounded-lg text-slate-400 hover:text-rail-blue hover:bg-rail-blue/10 transition-colors"
+                          title="Track Train"
+                        >
+                          <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+                        </button>
                       </div>
-                      <ArrowRight className="h-4 w-4 text-slate-400 flex-shrink-0 group-hover:text-rail-blue group-hover:translate-x-0.5 transition-all" />
-                    </button>
+                    </div>
                   ))}
                 </div>
               )}
@@ -291,13 +305,15 @@ export function MobileSearchModal() {
                   </div>
                   <div className="space-y-1.5">
                     {recentSearches.map((train) => (
-                      <button
+                      <div
                         key={train.id}
-                        type="button"
-                        onClick={() => handleSelectTrain(train)}
-                        className="w-full glass-panel group flex items-center justify-between rounded-xl p-2.5 text-left transition-all hover:bg-slate-100 dark:hover:bg-slate-800"
+                        className="w-full glass-panel group flex items-center justify-between rounded-xl p-2.5 transition-all hover:bg-slate-100 dark:hover:bg-slate-800"
                       >
-                        <div className="flex items-center gap-2.5 min-w-0">
+                        <button
+                          type="button"
+                          onClick={() => handleSelectTrain(train)}
+                          className="flex items-center gap-2.5 min-w-0 flex-1 text-left"
+                        >
                           <Train className="h-4 w-4 text-rail-blue flex-shrink-0" />
                           <div className="min-w-0">
                             <span className="font-mono text-[11px] font-bold text-rail-blue">
@@ -307,9 +323,19 @@ export function MobileSearchModal() {
                               {train.name}
                             </span>
                           </div>
+                        </button>
+
+                        <div className="flex items-center gap-1 flex-shrink-0 ml-2">
+                          <FavoriteButton train={train} size="xs" />
+                          <button
+                            type="button"
+                            onClick={() => handleSelectTrain(train)}
+                            className="p-1 text-slate-400 hover:text-rail-blue transition-colors"
+                          >
+                            <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
+                          </button>
                         </div>
-                        <ArrowRight className="h-3.5 w-3.5 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
-                      </button>
+                      </div>
                     ))}
                   </div>
                 </div>
