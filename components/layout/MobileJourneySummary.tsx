@@ -43,11 +43,11 @@ export function MobileJourneySummary({ journey, onRefresh, isRefreshing }: Mobil
             className={cn(
               'rounded-full px-2.5 py-0.5 text-[11px] font-bold border',
               delayPositive
-                ? 'bg-amber-500/10 text-amber-700 border-amber-500/20'
-                : 'bg-emerald-500/10 text-emerald-700 border-emerald-500/20'
+                ? 'bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/20'
+                : 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20'
             )}
           >
-            {delayPositive ? `+${journey.delayMinutes} min late` : 'On time'}
+            {delayPositive ? `Delayed by ${journey.delayMinutes} minutes` : 'On Time'}
           </span>
         </div>
       </div>

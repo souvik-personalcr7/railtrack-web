@@ -12,6 +12,19 @@ export interface Station {
   status: 'passed' | 'current' | 'upcoming';
   platform?: string;
   haltMinutes?: number;
+  isHalt?: boolean; // Scheduled stoppage (true) vs skipped/intermediate station (false)
+}
+
+export interface NextHaltETA {
+  stationCode: string;
+  stationName: string;
+  platform?: string;
+  scheduledArrival: string;
+  estimatedArrival: string; // Calculated time after delay
+  delayMinutes: number;
+  delayStatus: 'on_time' | 'delayed' | 'unavailable';
+  delayText: string; // "On Time" | "Delayed by X minutes" | "ETA unavailable"
+  distanceRemainingKm?: number;
 }
 
 export interface SearchResult {
@@ -64,7 +77,9 @@ export interface LiveJourney {
   previousStation?: Station;
   currentStation?: Station;
   nextStation?: Station;
+  nextHaltStation?: Station;
   ETA: string;
+  nextHaltETA?: NextHaltETA;
   stations: Station[];
   routeGeometry?: [number, number][]; // Array of [lng, lat] for MapLibre polyline
 }

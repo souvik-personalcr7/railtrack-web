@@ -49,7 +49,7 @@ export function JourneyCard({
         </div>
 
         <div className="flex items-center gap-3">
-          <ETAChip eta={journey.ETA} />
+          <ETAChip eta={journey.ETA} nextHaltETA={journey.nextHaltETA} />
           {onRefresh && (
             <button
               onClick={() => !isRefreshing && onRefresh()}

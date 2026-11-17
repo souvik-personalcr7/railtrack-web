@@ -51,6 +51,8 @@ export const TRAINS_DB: TrainEntry[] = [
   { number: '22221', name: 'Mumbai Vande Bharat Express', from: 'Mumbai CST', fromCode: 'CSMT', to: 'Shirdi', toCode: 'SAI' },
   { number: '22223', name: 'Amritsar Vande Bharat Express', from: 'New Delhi', fromCode: 'NDLS', to: 'Amritsar', toCode: 'ASR' },
   { number: '22229', name: 'Howrah Vande Bharat Express', from: 'Howrah', fromCode: 'HWH', to: 'New Jalpaiguri', toCode: 'NJP' },
+  { number: '22301', name: 'Vande Bharat Express', from: 'Howrah', fromCode: 'HWH', to: 'New Jalpaiguri', toCode: 'NJP' },
+  { number: '22302', name: 'Vande Bharat Express', from: 'New Jalpaiguri', fromCode: 'NJP', to: 'Howrah', toCode: 'HWH' },
   { number: '22231', name: 'Lucknow Vande Bharat Express', from: 'New Delhi', fromCode: 'NDLS', to: 'Lucknow', toCode: 'LKO' },
   { number: '20951', name: 'Ahmedabad Vande Bharat Express', from: 'Ahmedabad', fromCode: 'ADI', to: 'Mumbai Central', toCode: 'MMCT' },
   { number: '20971', name: 'Gorakhpur Vande Bharat', from: 'Lucknow', fromCode: 'LKO', to: 'Gorakhpur', toCode: 'GKP' },
@@ -61,6 +63,8 @@ export const TRAINS_DB: TrainEntry[] = [
   { number: '12269', name: 'Mumbai Duronto Express', from: 'Chennai Central', fromCode: 'MAS', to: 'Mumbai LTT', toCode: 'LTT' },
   // Express Trains
   { number: '12621', name: 'Tamil Nadu Express', from: 'New Delhi', fromCode: 'NDLS', to: 'Chennai Central', toCode: 'MAS' },
+  { number: '13173', name: 'Sabroom Kanchanjungha Express', from: 'Sealdah', fromCode: 'SDAH', to: 'Sabroom', toCode: 'SABR' },
+  { number: '13174', name: 'Sealdah Kanchanjungha Express', from: 'Sabroom', fromCode: 'SABR', to: 'Sealdah', toCode: 'SDAH' },
   { number: '12622', name: 'Tamil Nadu Express', from: 'Chennai Central', fromCode: 'MAS', to: 'New Delhi', toCode: 'NDLS' },
   { number: '12625', name: 'Kerala Express', from: 'New Delhi', fromCode: 'NDLS', to: 'Thiruvananthapuram', toCode: 'TVC' },
   { number: '12626', name: 'Kerala Express', from: 'Thiruvananthapuram', fromCode: 'TVC', to: 'New Delhi', toCode: 'NDLS' },
